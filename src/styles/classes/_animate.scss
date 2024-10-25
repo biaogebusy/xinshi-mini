@@ -1,0 +1,47 @@
+@keyframes scale-125 {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.25);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes scale-115 {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.15);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes scale-min {
+	0% {
+		transform: scale(0.9);
+	}
+	50% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(0.9);
+	}
+}
+
+.animate-scale-min {
+	animation: 1s scale-min infinite;
+}
+
+.animate-scale-115 {
+	animation: 1s scale-115 infinite;
+}
+
+.animate-scale-125 {
+	animation: 1s scale-125 infinite;
+}

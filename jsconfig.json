@@ -1,0 +1,26 @@
+{
+	"exclude": ["dist", "node_modules", ".idea", ".vscode"],
+	"include": ["src/**/*"],
+	"compilerOptions": {
+		"baseUrl": "./",
+		"paths": {
+			"@uiux": ["src/uiux"],
+			"@uiux/*": ["src/uiux/*"],
+			"@components": ["src/uiux/components"],
+			"@components/*": ["src/uiux/components/*"],
+			"@widgets": ["src/uiux/widgets"],
+			"@widgets/*": ["src/uiux/widgets/*"],
+			"@service": ["src/service"],
+			"@service/*": ["src/service/*"],
+			"@images": ["src/assets/images"],
+			"@images/*": ["src/assets/images/*"],
+			"@utils": ["src/utils"],
+			"@utils/*": ["src/utils/*"],
+			"@store": ["src/store"],
+			"@store/*": ["src/store/*"]
+		},
+		"target": "ES5",
+		"module": "ES6",
+		"jsx": "preserve"
+	}
+}

@@ -1,0 +1,82 @@
+// 小程序需要 page 选择器，:root不生效
+:root,
+page {
+	--primary-color-rgb: 0 117 57;
+	--primary-color: rgb(var(--primary-color-rgb) / 1);
+
+	--second-color-rgb: 255 210 0;
+	--second-color: rgb(var(--second-color-rgb) / 1);
+
+	--black-color: rgba(0, 0, 0, 1);
+	--black-color-50: rgba(0, 0, 0, 0.5);
+	--white-color: rgba(255, 255, 255, 1);
+	--success-color: rgba(38, 191, 38, 1);
+	--info-color: rgba(73, 106, 242, 1);
+	--warning-color: #ff7f00;
+	--error-color: rgba(250, 44, 25, 1);
+
+	--border-color: rgba(204, 204, 204, 1);
+	--border-radius-none: 0;
+	--border-radius-sm: 2px;
+	--border-radius-md: 4px;
+	--border-radius-lg: 8px;
+	--border-radius-max: 999px;
+	--border-width-base: 2px;
+	--border-width-sm: 4px;
+	--border-width-md: 8px;
+
+	--text-color: rgba(102, 102, 102, 1);
+	--text-color-light: rgba(128, 128, 128, 1);
+	--text-color-lighter: rgba(164, 164, 164, 1);
+	--text-color-dark: rgba(26, 26, 26, 1);
+	--font-size-xs: 20px;
+	--font-size-sm: 24px;
+	--font-size-md: 28px;
+	--font-size-lg: 32px;
+	--font-size-xl: 36px;
+	--font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica',
+		'Hiragino Sans GB', 'SimSun', sans-serif;
+
+	--background-color-lighter: rgba(249, 249, 249, 1);
+
+	--spacing-xs: 8px;
+	--spacing-sm: 16px;
+	--spacing-md: 32px;
+	--spacing-lg: 48px;
+	--spacing-xl: 64px;
+	--spacing-2xl: 96px;
+
+	--status-bar-height: 40px;
+	--navbar-height: 88px;
+	--navbar-background: var(--primary-color);
+	--navbar-color: #ffffff;
+
+	--tab-bar-color: #b2b2b2;
+	--tab-bar-active-color: var(--primary-color);
+
+	--safe-area-inset-top: 0px;
+	--safe-area-inset-left: 0px;
+	--safe-area-inset-right: 0px;
+	--safe-area-inset-bottom: 0px;
+
+	--nut-cell-desc-color: var(--text-color);
+	--nut-cell-after-border-bottom: 1px solid var(--border-color);
+}
+
+@supports (top: constant(safe-area-inset-top)) {
+	page {
+		--safe-area-inset-top: constant(safe-area-inset-top);
+		--safe-area-inset-left: constant(safe-area-inset-left);
+		--safe-area-inset-right: constant(safe-area-inset-right);
+		--safe-area-inset-bottom: constant(safe-area-inset-bottom);
+	}
+}
+
+@supports (top: env(safe-area-inset-top)) {
+	page {
+		--safe-area-inset-top: env(safe-area-inset-top);
+		--safe-area-inset-left: env(safe-area-inset-left);
+		--safe-area-inset-right: env(safe-area-inset-right);
+		--safe-area-inset-bottom: env(safe-area-inset-bottom);
+	}
+}
