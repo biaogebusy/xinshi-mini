@@ -11,7 +11,7 @@ export { dateFormat } from './date';
 /**
  * * 用户相关
  */
-export { getAppSettings } from './auth';
+export { getAppSettings, getUserLocation, getUserAddress } from './auth';
 
 /**
  * 地理位置

@@ -1,7 +1,7 @@
 // 小程序需要 page 选择器，:root不生效
 :root,
 page {
-	--primary-color-rgb: 0 117 57;
+	--primary-color-rgb: 41 98 255;
 	--primary-color: rgb(var(--primary-color-rgb) / 1);
 
 	--second-color-rgb: 255 210 0;
