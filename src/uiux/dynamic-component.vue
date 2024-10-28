@@ -1,5 +1,5 @@
 <template>
-  <component :is="getComponent(data.content)" :pageConfig="data.pageConfig" :data="data.content" :config="data.config"
+  <component :is="getComponentName(data.content)" :pageConfig="data.pageConfig" :data="data.content" :config="data.config"
     :urlParams="data.urlParams" />
 </template>
 
@@ -52,12 +52,18 @@ export default {
     },
   },
   setup() {
-    const getComponent = content => {
-      return content.name === 'text' ? 'base-text' : content.name;
+    const getComponentName = content => {
+      let name = '';
+      if (content.type === 'article') {
+        name = 'article';
+      } else {
+        name = content.name
+      }
+      return name === 'text' ? 'base-text' : name;
     };
 
     return {
-      getComponent
+      getComponentName
     }
   },
 };
