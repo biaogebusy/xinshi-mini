@@ -14,7 +14,6 @@ import Meta from '@components/other/meta.vue';
 import Login from '@components/user/login.vue';
 import BaseText from '@widgets/base-text.vue';
 import Search from '@components/action/search.vue';
-import DynamicWidget from '@widgets/dynamic-widget.vue';
 import NoticeBar from '@components/other/notice-bar.vue';
 import PhoneLogin from '@components/user/phone-login.vue';
 import DynamicForm from '@components/form/dynamic-form.vue';
@@ -40,7 +39,6 @@ export default {
     DynamicForm,
     MediaList1v1,
     MediaList1v2,
-    DynamicWidget,
     UpdateProfile,
     DynamicScroller,
     DynamicCardList1v2,
