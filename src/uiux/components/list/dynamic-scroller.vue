@@ -1,5 +1,16 @@
 <template>
-	<div class="dynamic-scroller" v-if="!loading">
+	<div class="dynamic-scroller relative" v-if="!loading">
+		<nut-popup
+			pop-class="box-border"
+			position="top"
+			v-model:visible="show"
+			:style="{ padding: '50px 20px 20px' }"
+		>
+			<dynamic-form
+				@modalChange="onModalChange"
+				:data="data.search.filter"
+			></dynamic-form>
+		</nut-popup>
 		<Scroller
 			:triggered="triggered"
 			:hasMore="customHasMore"
@@ -25,16 +36,6 @@
 					</div>
 					<div class="right">已加载{{ customList.length }}条数据</div>
 				</div>
-				<nut-popup
-					position="top"
-					v-model:visible="show"
-					:style="{ padding: '50px 20px 20px' }"
-				>
-					<dynamic-form
-						@modalChange="onModalChange"
-						:data="data.search.filter"
-					></dynamic-form>
-				</nut-popup>
 			</template>
 			<template #content>
 				<div class="relative" v-if="customList.length > 0">
