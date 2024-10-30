@@ -1,32 +1,25 @@
 <template>
-	<div
-		class="dynamic-widget flex flex-wrap"
-		:style="data.style"
-		:class="data.classes"
-	>
-		<component
-			v-for="(item, key) in data.elements"
-			:key="key"
-			:is="item.type === 'text' ? 'base-text' : item.type"
-			:style="item.style"
-			:data="item"
-		></component>
-	</div>
+  <div class="dynamic-widget" :class="data.content.classes">
+    <component :is="data.type === 'text' ? 'base-text' : data.type" :style="data.content.style" :data="data.content">
+    </component>
+  </div>
 </template>
 <script>
 import BaseText from './base-text.vue';
 import UiImg from './ui-img.vue';
+import card1v1 from '@uiux/widgets/card/card-1v1.vue';
 export default {
-	name: 'dynamic-widget',
-	components: {
-		BaseText,
-		UiImg,
-	},
-	props: {
-		data: {
-			type: Object,
-		},
-	},
+  name: 'dynamic-widget',
+  components: {
+    BaseText,
+    UiImg,
+    card1v1,
+  },
+  props: {
+    data: {
+      type: Object,
+    },
+  },
 };
 </script>
 <style lang="scss"></style>

@@ -1,5 +1,5 @@
 <template>
-  <component :is="getComponent(data.content)" :pageConfig="data.pageConfig" :data="data.content" :config="data.config"
+  <component :is="getComponentName(data.content)" :pageConfig="data.pageConfig" :data="data.content" :config="data.config"
     :urlParams="data.urlParams" />
 </template>
 
@@ -14,7 +14,6 @@ import Meta from '@components/other/meta.vue';
 import Login from '@components/user/login.vue';
 import BaseText from '@widgets/base-text.vue';
 import Search from '@components/action/search.vue';
-import DynamicWidget from '@widgets/dynamic-widget.vue';
 import NoticeBar from '@components/other/notice-bar.vue';
 import PhoneLogin from '@components/user/phone-login.vue';
 import DynamicForm from '@components/form/dynamic-form.vue';
@@ -40,7 +39,6 @@ export default {
     DynamicForm,
     MediaList1v1,
     MediaList1v2,
-    DynamicWidget,
     UpdateProfile,
     DynamicScroller,
     DynamicCardList1v2,
@@ -54,12 +52,18 @@ export default {
     },
   },
   setup() {
-    const getComponent = content => {
-      return content.name === 'text' ? 'base-text' : content.name;
+    const getComponentName = content => {
+      let name = '';
+      if (content.type === 'article') {
+        name = 'article';
+      } else {
+        name = content.name
+      }
+      return name === 'text' ? 'base-text' : name;
     };
 
     return {
-      getComponent
+      getComponentName
     }
   },
 };

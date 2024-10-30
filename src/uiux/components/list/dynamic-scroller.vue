@@ -1,5 +1,5 @@
 <template>
-	<div class="dynamic-scroller relative" v-if="!loading">
+	<div class="dynamic-scroller" v-if="!loading">
 		<nut-popup
 			pop-class="box-border"
 			position="top"
@@ -39,12 +39,11 @@
 			</template>
 			<template #content>
 				<div class="relative" v-if="customList.length > 0">
-					<component
-						:data="item"
-						:is="data.params.widget"
+					<dynamicWidget
+						:data="getWidgetData(item)"
 						v-for="(item, key) in customList"
 						:key="key"
-					></component>
+					></dynamicWidget>
 				</div>
 				<empty v-else />
 			</template>
@@ -61,7 +60,6 @@
 	</div>
 </template>
 <script>
-import { imageUrlFix } from '@utils/image';
 import { ref, reactive, onMounted, toRefs, computed } from 'vue';
 import { GET } from '@service/http';
 import Empty from '@widgets/empty.vue';
@@ -71,7 +69,7 @@ import { toQueryString } from '@utils/common';
 import { getSystemInfoSync } from '@tarojs/taro';
 import { IconFont } from '@nutui/icons-vue-taro';
 import Scroller from '@uiux/widgets/scroller.vue';
-import card1v1 from '@uiux/widgets/card/card-1v1.vue';
+import dynamicWidget from '@uiux/widgets/dynamic-widget.vue';
 import dynamicForm from '@uiux/components/form/dynamic-form.vue';
 export default {
 	name: 'dynamic-scroller',
@@ -79,8 +77,8 @@ export default {
 		empty: Empty,
 		Scroller,
 		IconFont,
-		card1v1,
 		dynamicForm,
+		dynamicWidget,
 	},
 	props: {
 		data: {
@@ -102,6 +100,13 @@ export default {
 			height: '',
 			searchParams: {},
 		});
+
+		const getWidgetData = item => {
+			return {
+				type: data.params.widget,
+				content: item,
+			};
+		};
 
 		const onLoadMore = () => {
 			if (customHasMore.value && !loadMore.value) {
@@ -210,7 +215,7 @@ export default {
 			onRefresh,
 			triggered,
 			onLoadMore,
-			imageUrlFix,
+			getWidgetData,
 			customHasMore,
 			onModalChange,
 			...toRefs(content),

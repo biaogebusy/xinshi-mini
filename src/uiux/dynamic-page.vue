@@ -146,10 +146,6 @@ export default {
       navigationStore.SET_TITLE(data.value.title || '');
     });
 
-    const getComponent = item => {
-      return item.type === 'text' ? 'base-text' : item.type;
-    };
-
     onMounted(() => {
       shareWX();
       checkWxUpdate();
@@ -187,7 +183,6 @@ export default {
       tabBar,
       urlParams,
       tabbarOptions,
-      getComponent,
       pageConfig,
     };
   },
