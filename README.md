@@ -1,4 +1,4 @@
-<h1 align="center">信使小程序</h1>
+<h1 align="center">信使小程序框架</h1>
 
 <p align="center">
   <img src="src/assets/images/logo-white.png" alt="logo" width="100px"/>
