@@ -1,5 +1,5 @@
 <template>
-  <nut-navbar placeholder :left-show="false">
+  <nut-navbar :placeholder="true" :left-show="false">
     <template #left>
       <slot name="left">
         <IconFont name="left" v-if="options.backButton === undefined ? backButton : options.backButton

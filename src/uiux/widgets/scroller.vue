@@ -2,7 +2,6 @@
   <scroll-view :scroll-y="true" :refresher-enabled="true" :refresher-triggered="triggered" :show-scrollbar="false"
     :style="`width: 100%; height: ${height}`" @refresherrefresh="$emit('refresh')">
     <slot name="top"></slot>
-    <slot name="filter"></slot>
     <slot name="content"></slot>
     <div class="has-more text-center text-md" v-if="hasMore">
       <div class="flex justify-center py-md" @click="$emit('loadMore')">
