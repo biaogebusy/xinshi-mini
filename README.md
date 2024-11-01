@@ -1,4 +1,4 @@
-<h1 align="center">信使小程序框架</h1>
+<h1 align="center">信使小程序开发框架</h1>
 
 <p align="center">
   <img src="src/assets/images/logo-white.png" alt="logo" width="100px"/>
@@ -29,12 +29,19 @@
 
 <p align="center">
   <img style="border-radius:10px" src="src/assets/images/builder.png" alt="logo" width="100%"/>
-  <br>
-   <img style="border-radius:10px" src="src/assets/images/xinshi-mini.png" width="100%"/>
+  <br><br>
+   <img style="border-radius:10px" src="src/assets/images/xinshi-mini.png" width="80%"/>
   <br>
 </p>
 
 > 信使 Web builder 是基于 Material 的 Angular 低代码前端框架，丰富的组件库可提供优秀的数字创新体验，<br>通过拖拽可视化配置快速构建现代化响应式 UI、多主题、多语言的 Web 页面，包含美观的后台管理主题，拥有完整的前端解决方案。体验：https://builder.design
+
+## 案例
+
+| 名称     | 小程序                                                  | 说明                                                             |
+| -------- | ------------------------------------------------------- | ---------------------------------------------------------------- |
+| 小海报   | <img src="src/assets/images/xhb.jpg" width="80px"/>     | 根据用户的距离投送广告，浏览广告可得红包现金，小区团、同城团交易 |
+| 宾雀自助 | <img src="src/assets/images/bq-self.jpg" width="80px"/> | 用户扫码开通 4G 或蓝牙麻将设备自助服务，分销商模式，使用微信支付 |
 
 ## 开发步骤
 
