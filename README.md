@@ -30,6 +30,7 @@
 <p align="center">
   <img style="border-radius:10px" src="src/assets/images/builder.png" alt="logo" width="100%"/>
   <br>
+   <img style="border-radius:10px" src="src/assets/images/xinshi-mini.png" width="100%"/>
   <br>
 </p>
 
