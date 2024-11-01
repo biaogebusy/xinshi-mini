@@ -26,7 +26,8 @@
       </template>
       <template #content>
         <div class="relative" v-if="customList.length > 0">
-          <component :data="item" :is="data.params.widget" v-for="(item, key) in customList" :key="key"></component>
+          <dynamic-widget :data="{ type: data.params.widget, content: item }" v-for="(item, key) in customList"
+            :key="key"></dynamic-widget>
         </div>
         <empty v-else />
       </template>

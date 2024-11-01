@@ -1,6 +1,6 @@
 <template>
-  <div class="dynamic-widget" :class="data.content.classes">
-    <component :is="data.type === 'text' ? 'base-text' : data.type" :style="data.content.style" :data="data.content">
+  <div class="dynamic-widget" :class="data.content?.classes">
+    <component :is="data.type === 'text' ? 'base-text' : data.type" :style="data.content?.style" :data="data.content">
     </component>
   </div>
 </template>
