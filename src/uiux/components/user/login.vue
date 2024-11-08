@@ -8,7 +8,7 @@
     <div class="actions flex-none mx-xl">
       <div class="item mb-sm">
         <nut-button @click="login" size="large" type="primary">
-          微信一键登录
+          微信快捷登录
         </nut-button>
       </div>
       <!-- <div class="item mb-sm" @click="phoneLogin">
@@ -63,7 +63,7 @@ export default {
     },
   },
   setup({ data }) {
-    const policy = ref(true);
+    const policy = ref(false);
     const showPopup = ref(false);
     const visible = ref(false);
     const coreConfig = inject('coreConfig');
