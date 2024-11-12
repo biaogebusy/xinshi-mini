@@ -1,6 +1,6 @@
 <template>
 	<div class="dynamic-scroller" v-if="!loading">
-		<nut-popup
+		<nut-popup v-if="data.search && data.search.filter"
 			pop-class="box-border"
 			position="top"
 			v-model:visible="show"
