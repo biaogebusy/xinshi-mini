@@ -8,16 +8,17 @@
     <div class="actions flex-none mx-xl">
       <div class="item mb-sm">
         <nut-button @click="login" size="large" type="primary">
-          微信一键登录
+          微信快捷登录
         </nut-button>
       </div>
-      <!-- <div class="item mb-sm" @click="phoneLogin">
+      <div class="item mb-sm" @click="phoneLogin">
         <nut-button class="mb-sm" size="large" type="default">
-          手机号登录
+          手机号快捷登录
         </nut-button>
-      </div> -->
-      <div class="item my-5 flex" v-if="data.policy.enable">
-        <nut-popover v-model:visible="visible" location="top-start" theme="dark" :list="[{ name: data.policy.tooltip }]">
+      </div>
+      <div class="item my-8 flex" v-if="data.policy.enable">
+        <nut-popover v-model:visible="showPopover" location="top-start" theme="dark"
+          :list="[{ name: data.policy.tooltip }]">
           <template #reference>
             <nut-checkbox v-model="policy" label="复选框">
               {{ data.policy.checkboxLabel }}
@@ -63,9 +64,9 @@ export default {
     },
   },
   setup({ data }) {
-    const policy = ref(true);
+    const policy = ref(false);
     const showPopup = ref(false);
-    const visible = ref(false);
+    const showPopover = ref(false);
     const coreConfig = inject('coreConfig');
     const userStore = useUserStore();
     const profile = computed(() => userStore.profile);
@@ -85,9 +86,15 @@ export default {
       }
     });
 
+    watch(policy, value => {
+      if (value) {
+        showPopover.value = true;
+      }
+    })
+
     const login = () => {
       if (!policy.value) {
-        visible.value = true;
+        showPopover.value = true;
         return;
       }
 
@@ -106,7 +113,7 @@ export default {
 
     const phoneLogin = () => {
       if (!policy.value) {
-        visible.value = true;
+        showPopover.value = true;
         return;
       }
 
@@ -119,7 +126,7 @@ export default {
       policy,
       login,
       phoneLogin,
-      visible,
+      showPopover,
       showPopup,
     };
   },
