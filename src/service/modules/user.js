@@ -212,7 +212,6 @@ export async function auth() {
 		if (!isWechatLogin || !profile || !sessionid || !token) {
 			// 微信登录并获取到code
 			const { errMsg, code } = await appLogin();
-			wx.reportEvent('wechat_login', {});
 
 			if (!code) {
 				// ! 登录失败
@@ -220,7 +219,6 @@ export async function auth() {
 					icon: 'none',
 					title: `微信登录授权失败：${errMsg}`,
 				});
-				wx.reportEvent('wechat_login_fail', {});
 				throw new Error(`微信登录授权失败：${errMsg}`);
 			} else {
 				// * 登陆成功
@@ -252,10 +250,7 @@ export async function auth() {
 						header,
 						data: { csrf_token, user, errCode, errMsg },
 					} = await wechatUserBindDrupalUser({ code: refreshCode });
-					wx.reportEvent('new_user_bind', {
-						code: errCode,
-						message: errMsg,
-					});
+
 					if (errCode === 0) {
 						// * 绑定成功
 						setUserProfile({
@@ -305,7 +300,6 @@ export async function auth() {
 				profile: user,
 			});
 			console.log(`isDrupalLogin: ${isDrupalLogin}`);
-			wx.reportEvent('wechat_login_success', {});
 			hideLoading();
 		}
 	} catch (error) {

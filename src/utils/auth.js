@@ -46,7 +46,6 @@ export function getUserLocation() {
 							hideLoading();
 							resolve({ latitude, longitude });
 							userStore.setUserLocation({ latitude, longitude });
-							wx.reportEvent('user_allowed_location', {});
 						})
 						.catch(err => {
 							hideLoading();
@@ -58,7 +57,6 @@ export function getUserLocation() {
 					reject(err);
 					hideLoading();
 					console.log(err);
-					wx.reportEvent('user_reject_location', {});
 				},
 			});
 		}

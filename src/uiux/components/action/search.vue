@@ -73,9 +73,6 @@ export default {
 
     const onSearch = key => {
       if (key) {
-        wx.reportEvent('search', {
-          key: key,
-        });
         history.value = [...new Set([...history.value, key])];
         setStorageSync('search', history.value);
         gotoPage(`${data.target}&key=${key}`);

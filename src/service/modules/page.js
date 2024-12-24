@@ -50,11 +50,6 @@ function shareWX() {
 			console.log(target);
 		}
 
-		wx.reportEvent('share', {
-			url: navigationStore.title,
-			title: currentPage.$taroPath,
-		});
-
 		return {
 			title: navigationStore.title,
 			path: currentPage.$taroPath,
@@ -69,11 +64,6 @@ function shareWX() {
 			// 来自页面内转发按钮
 			console.log(target);
 		}
-
-		wx.reportEvent('share', {
-			url: navigationStore.title,
-			title: currentPage.$taroPath,
-		});
 
 		return {
 			title: navigationStore.title,
