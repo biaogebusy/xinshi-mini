@@ -9,7 +9,13 @@
       ">
     <nut-tabbar-item v-for="(item, key) in options.items" :key="key" :tab-title="item.title" :name="item.name">
       <template #icon="props">
-        <IconFont :name="item.icon"></IconFont>
+        <template v-if="item.img">
+          <img v-if="props.active" :src="imageUrlFix(item.activeImg)" />
+          <img v-else :src="imageUrlFix(item.img)" />
+        </template>
+        <template v-else>
+          <IconFont :name="item.icon"></IconFont>
+        </template>
       </template>
     </nut-tabbar-item>
   </nut-tabbar>
@@ -19,6 +25,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { switchTab } from '@tarojs/taro';
 import { storeToRefs } from 'pinia';
 import { useNavigationStore } from '@store/navigation';
+import { imageUrlFix } from '@utils/image';
 import { IconFont } from '@nutui/icons-vue-taro';
 export default {
   name: 'custom-tab-bar',
