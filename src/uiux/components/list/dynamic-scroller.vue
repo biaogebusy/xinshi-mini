@@ -74,6 +74,9 @@ export default {
 
     const customHasMore = ref(true);
     const isEnd = ref(false);
+    const userStore = useUserStore();
+    const profile = computed(() => userStore.profile || null);
+    const token = computed(() => userStore.token || null);
     const content = reactive({
       customList: [],
       height: '',
@@ -129,9 +132,7 @@ export default {
           const query = data.params.query;
           Object.keys(query).map(key => {
             if (query[key].includes('{id}')) {
-              const userStore = useUserStore();
-              const profile = computed(() => userStore.profile || null);
-              const token = computed(() => userStore.token || null);
+
               if (!profile.value && !token.value) {
                 gotoLogin();
               }
@@ -141,7 +142,8 @@ export default {
           options = Object.assign(options, query);
         }
         const query = toQueryString(options);
-        GET(`${data.params.api}?${query}`)
+        const api = data.params.api.replace('{uid}', profile.value.uid)
+        GET(`${api}?${query}`)
           .then(({ data }) => {
             if (pager === 0) {
               content.customList = [];
