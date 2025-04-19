@@ -1,5 +1,5 @@
 <template>
-  <div class="page h-full box-border">
+  <div class="page h-full box-border" :class="pagePath">
     <dynamic-page :options="pageConfig" />
   </div>
 </template>
@@ -16,7 +16,8 @@ export default {
   setup() {
     const pages = getCurrentPages();
     const currentPage = pages[pages.length - 1];
-    const { options } = currentPage
+    const { options } = currentPage;
+    const pagePath = `page-${options.url.replace(/\//g, '-')}`
     const pageConfig = ref({
       params: options,
       backButton: true,
@@ -31,6 +32,7 @@ export default {
 
     return {
       pageConfig,
+      pagePath
     };
   },
 };
