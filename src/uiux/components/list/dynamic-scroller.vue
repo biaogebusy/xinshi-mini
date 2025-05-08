@@ -142,8 +142,7 @@ export default {
           options = Object.assign(options, query);
         }
         const query = toQueryString(options);
-        const api = data.params.api.replace('{uid}', profile.value.uid)
-        GET(`${api}?${query}`)
+        GET(`${data.params.api}?${query}`)
           .then(({ data }) => {
             if (pager === 0) {
               content.customList = [];
