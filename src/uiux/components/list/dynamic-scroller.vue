@@ -1,5 +1,5 @@
 <template>
-  <div class="dynamic-scroller relative" v-if="!loading">
+  <div class="dynamic-scroller relative" v-if="!loading" :style="{ top: top + 'px', bottom: bottom + 'px' }">
     <nut-popup v-if="data.search && data.search.filter" pop-class="box-border" position="top" v-model:visible="show"
       :style="{ padding: '50px 20px 20px' }">
       <dynamic-form @modalChange="onModalChange" :data="data.search.filter"></dynamic-form>
@@ -19,7 +19,7 @@
         </div>
       </div>
     </template>
-    <Scroller :triggered="triggered" :hasMore="customHasMore" :isEnd="isEnd" :loading="loadMore" :height="height"
+    <Scroller :triggered="triggered" :hasMore="customHasMore" :isEnd="isEnd" :loading="loadMore" :height="height + 'px'"
       @loadMore="onLoadMore" @refresh="onRefresh">
       <template #top>
         <div v-if="data.search" style="height:44px"></div>
@@ -80,6 +80,8 @@ export default {
     const content = reactive({
       customList: [],
       height: '',
+      top: 0,
+      bottom: 0,
       searchParams: {},
     });
 
@@ -181,9 +183,11 @@ export default {
     };
     onMounted(() => {
       const sysInfo = getSystemInfoSync();
-      const { height, top } = sysInfo.safeArea;
-      content.height =
-        height - sysInfo.statusBarHeight - top + 'px';
+      const { windowHeight, statusBarHeight } = sysInfo;
+      // 40: navBarHeight 70: tabBarHeight
+      content.top = statusBarHeight + 40;
+      content.bottom = 70;
+      content.height = windowHeight - statusBarHeight - 40 - 70;
       init();
     });
     return {
@@ -203,4 +207,11 @@ export default {
   },
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+.dynamic-scroller {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+</style>

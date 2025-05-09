@@ -64,6 +64,10 @@ export default {
 </script>
 
 <style lang="scss">
+.nut-tabbar__placeholder {
+  height: 70px !important;
+}
+
 .nut-tabbar {
   border-bottom: none;
   padding: var(--spacing-sm) 0;
