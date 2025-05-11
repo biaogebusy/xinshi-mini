@@ -21,8 +21,18 @@ export default {
     const pageConfig = ref({
       params: options,
       backButton: true,
-      tabBar: options.tabBar ?? true
+      tabBar: stringToBoolean(options.tabBar) ?? true
     });
+
+    function stringToBoolean(str) {
+      if (str === 'true') {
+        return true;
+      } else if (str === 'false') {
+        return false;
+      } else {
+        return undefined
+      }
+    }
 
     // 分享设置
     definePageConfig({
