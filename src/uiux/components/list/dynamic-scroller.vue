@@ -138,7 +138,9 @@ export default {
               if (!profile.value && !token.value) {
                 gotoLogin();
               }
-              query[key] = query[key].replace('{id}', profile.value.uid);
+              if (profile?.value?.uid) {
+                query[key] = query[key].replace('{id}', profile.value.uid);
+              }
             }
           });
           options = Object.assign(options, query);
