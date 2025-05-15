@@ -2,11 +2,11 @@
   <div class="region h-full"
     :style="`padding-top:${(statusBarHeight ? statusBarHeight : 0) + (navBarHeight ? navBarHeight : 0)}px`">
     <div class="custom-nav-bar w-full" :style="{
-          '--status-bar-height': statusBarHeight ? statusBarHeight + 'px' : false,
-          '--navbar-height': navBarHeight ? navBarHeight + 'px' : false,
-          '--navbar-background': pageConfig.navBarBackground,
-          '--navbar-color': pageConfig.navBarColor,
-        }">
+      '--status-bar-height': statusBarHeight ? statusBarHeight + 'px' : false,
+      '--navbar-height': navBarHeight ? navBarHeight + 'px' : false,
+      '--navbar-background': pageConfig.navBarBackground,
+      '--navbar-color': pageConfig.navBarColor,
+    }">
       <slot name="navbar">
         <custom-navbar :options="pageConfig" :title="data.title" />
       </slot>
@@ -15,10 +15,10 @@
     <div class="w-full">
       <slot name="components">
         <div v-for="(item, key) in data.body || []" :key="key" :class="[
-                  item.classes,
-                  item.spacer && item.spacer.x ? `mx-${item.spacer.x}` : 'mx-md',
-                  item.spacer && item.spacer.y ? `my-${item.spacer.y}` : 'my-md',
-                ]">
+          item.classes,
+          item.spacer && item.spacer.x ? `mx-${item.spacer.x}` : 'mx-md',
+          item.spacer && item.spacer.y ? `my-${item.spacer.y}` : 'my-md',
+        ]">
           <div class="component-title mb-sm mx-md text-xl font-semibold" v-if="item.blockTitle">
             {{ item.blockTitle.label }}
           </div>
@@ -56,7 +56,7 @@ import {
   shareWX,
   gotoLogin
 } from '@service/index';
-import { checkWxUpdate } from '@utils/index';
+import { checkWxUpdate, toQueryString } from '@utils/index';
 import CustomNavbar from '@uiux/components/navigation/custom-navbar.vue';
 import CustomTabBar from '@uiux/components/navigation/custom-tabbar.vue';
 import DynamicComponent from '@uiux/dynamic-component.vue'
@@ -114,7 +114,8 @@ export default {
       }
     });
     provide('coreConfig', coreConfig);
-    loadLandingPage(options.params.url)
+    const api = toQueryString(options.params).replace('url=', '')
+    loadLandingPage(decodeURIComponent(api))
       .then(res => {
         const config = res.data.config;
         if (config) {
