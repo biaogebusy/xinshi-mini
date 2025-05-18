@@ -1,5 +1,5 @@
 <template>
-  <nut-input class="nut-input-text" :value="modelValue" :model-value="modelValue" :type="data.mode"
+  <input class="nut-input-text" :value="modelValue" :model-value="modelValue" :type="data.mode"
     @input="$emit('update:modelValue', $event.target.value)" :placeholder="data.placeholder"
     :maxlength="getOptionValue('maxLength') || 200" />
 </template>
