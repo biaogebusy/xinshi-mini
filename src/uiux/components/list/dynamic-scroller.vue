@@ -28,7 +28,7 @@
       <template #content>
         <div class="relative" v-if="customList.length > 0">
           <dynamic-widget :data="{ type: data.params.widget, content: item }" v-for="(item, key) in customList"
-            :key="key"></dynamic-widget>
+            @scrollChange="onScrollChange" :key="key"></dynamic-widget>
         </div>
         <empty v-else />
       </template>
@@ -98,7 +98,7 @@ export default {
         getContent(currentPage.value + 1);
       }
     };
-    const onRefresh = e => {
+    const onRefresh = () => {
       triggered.value = true;
       setTimeout(() => {
         getContent();
@@ -121,6 +121,10 @@ export default {
       show.value = false;
       content.searchParams = value;
       getContent();
+    };
+
+    const onScrollChange = () => {
+      onRefresh();
     };
 
     const getContent = (pager = 0) => {
@@ -204,6 +208,7 @@ export default {
       getWidgetData,
       customHasMore,
       onModalChange,
+      onScrollChange,
       ...toRefs(content),
     };
   },
