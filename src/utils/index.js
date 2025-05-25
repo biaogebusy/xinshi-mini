@@ -22,6 +22,7 @@ export {
 	mergeDeep,
 	gotoPage,
 	checkWxUpdate,
+	buildUrlString,
 	getParameFromURL,
 	toQueryString,
 } from './common';

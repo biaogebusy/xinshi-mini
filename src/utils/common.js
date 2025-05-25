@@ -102,3 +102,17 @@ export const toQueryString = obj => {
 		.map(key => encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]))
 		.join('&');
 };
+
+export const buildUrlString = params => {
+	const { url, ...restParams } = params;
+	if (url === undefined) {
+		throw new Error("参数中必须包含 'url' 属性");
+	}
+	const queryString = Object.entries(restParams)
+		.map(
+			([key, value]) =>
+				`${encodeURIComponent(key)}=${encodeURIComponent(value)}`,
+		)
+		.join('&');
+	return queryString ? `${url}&${queryString}` : url;
+};

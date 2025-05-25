@@ -56,7 +56,7 @@ import {
   shareWX,
   gotoLogin
 } from '@service/index';
-import { checkWxUpdate, toQueryString } from '@utils/index';
+import { checkWxUpdate, buildUrlString } from '@utils/index';
 import CustomNavbar from '@uiux/components/navigation/custom-navbar.vue';
 import CustomTabBar from '@uiux/components/navigation/custom-tabbar.vue';
 import DynamicComponent from '@uiux/dynamic-component.vue'
@@ -114,8 +114,8 @@ export default {
       }
     });
     provide('coreConfig', coreConfig);
-    const api = toQueryString(options.params).replace('url=', '')
-    loadLandingPage(decodeURIComponent(api))
+    const api = buildUrlString(options.params)
+    loadLandingPage(api)
       .then(res => {
         const config = res.data.config;
         if (config) {
