@@ -1,5 +1,5 @@
 <template>
-  <nut-tabbar bottom placeholder size="23px" unactive-color="var(--tab-bar-color)"
+  <nut-tabbar bottom size="23px" unactive-color="var(--tab-bar-color)"
     active-color="var(--tab-bar-active-color)" v-model="tabBarActive" @tab-switch="(item) => {
       navigationStore.SET_TAB_BAR_ACTIVE(item.name);
       switchTab({
@@ -64,10 +64,6 @@ export default {
 </script>
 
 <style lang="scss">
-.nut-tabbar__placeholder {
-  height: 70px !important;
-}
-
 .nut-tabbar {
   border-bottom: none;
   padding: var(--spacing-sm) 0;
