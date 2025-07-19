@@ -1,0 +1,33 @@
+name: Build weapp xhb
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./
+    steps:
+      - name: work around permission issue
+        run: git config --global --add safe.directory *
+
+      - name: Checkout
+        uses: actions/checkout@v3.0.1
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Cache verify
+        run: npm cache verify
+
+      - name: NPM Install
+        run: npm ci over npm
+
+      - name: NPM build weapp
+        run: npm run build
