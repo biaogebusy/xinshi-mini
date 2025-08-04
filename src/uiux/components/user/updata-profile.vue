@@ -8,7 +8,7 @@
         <IconFont size="16px" name="photograph"></IconFont>
       </button>
       <div class="my-md">
-        <input class="nickname" type="nickname" v-model="username" placeholder="请输入昵称" :cursor="true" @input="onChange" />
+        <input class="nickname" type="nickname" v-model="username" placeholder="请输入昵称" @input="onChange" />
       </div>
       <div class="mt-md">
         <nut-button :disabled="disabled" @click="updateName(username)" type="primary">
