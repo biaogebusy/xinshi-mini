@@ -26,9 +26,10 @@
         <slot name="top"></slot>
       </template>
       <template #content>
-        <div class="relative" v-if="customList.length > 0">
-          <dynamic-widget :data="{ type: data.params.widget, content: item }" v-for="(item, key) in customList"
-            @scrollChange="onScrollChange" :key="key"></dynamic-widget>
+        <div :class="`relative ${data.params?.containerClasses}`" v-if="customList.length > 0">
+          <div :class="data.params?.itemClasses" v-for="(item, key) in customList" :key="key">
+            <component :data="item" :is="data.params.widget" @scrollChange="onScrollChange"></component>
+          </div>
         </div>
         <empty v-else />
       </template>
@@ -50,10 +51,16 @@ import { IconFont } from '@nutui/icons-vue-taro';
 import Scroller from '@uiux/widgets/scroller.vue';
 import dynamicWidget from '@uiux/widgets/dynamic-widget.vue';
 import dynamicForm from '@uiux/components/form/dynamic-form.vue';
+import baseText from '@uiux/widgets/base-text.vue';
+import uiImg from '@uiux/widgets/ui-img.vue';
+import card1v1 from '@uiux/widgets/card/card-1v1.vue';
 export default {
   name: 'dynamic-scroller',
   components: {
+    uiImg,
     empty: Empty,
+    baseText,
+    card1v1,
     Scroller,
     IconFont,
     dynamicForm,
