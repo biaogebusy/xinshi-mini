@@ -24,7 +24,7 @@
             </div>
             <div class="px-sm flex flex-col -my-sm">
               <div class="name mr-xs font-bold" @click="gotoPage(data.updateUrl)">
-                {{ profile.name }}
+                {{ profile.full_name || profile.name }}
                 <IconFont size="12" name="edit"></IconFont>
               </div>
               <div class="flex">

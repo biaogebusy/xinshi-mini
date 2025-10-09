@@ -235,7 +235,7 @@ export async function auth() {
 			// * 使用微信个人信息登录后台
 			const {
 				header,
-				data: { csrf_token, user, errCode, errMsg },
+				data: { csrf_token, errCode, errMsg },
 			} = await LoginDrupal({
 				code: appCode,
 				// ...profile,
@@ -248,7 +248,7 @@ export async function auth() {
 				if (refreshCode) {
 					const {
 						header,
-						data: { csrf_token, user, errCode, errMsg },
+						data: { csrf_token, errCode, errMsg },
 					} = await wechatUserBindDrupalUser({ code: refreshCode });
 
 					if (errCode === 0) {
@@ -256,7 +256,6 @@ export async function auth() {
 						setUserProfile({
 							sessionid: header['Set-Cookie'],
 							token: csrf_token,
-							profile: user,
 						});
 						console.log(`${errCode}: 新用户流程`);
 						hideLoading();
@@ -266,7 +265,6 @@ export async function auth() {
 						setUserProfile({
 							sessionid: header['Set-Cookie'],
 							token: csrf_token,
-							profile: user,
 						});
 						console.log(`${errCode}: 新用户流程`);
 						hideLoading();
@@ -297,7 +295,6 @@ export async function auth() {
 			setUserProfile({
 				sessionid: header['Set-Cookie'],
 				token: csrf_token,
-				profile: user,
 			});
 			console.log(`isDrupalLogin: ${isDrupalLogin}`);
 			hideLoading();
@@ -318,10 +315,11 @@ export async function auth() {
  * @param {String} token
  * @param {Object} profile
  */
-function setUserProfile({ sessionid, token, profile }) {
+async function setUserProfile({ sessionid, token }) {
 	userStore.setSessionid(sessionid);
 	userStore.setToken(token);
-	userStore.setProfile(profile);
+	const { data } = await getDrupalProfile();
+	userStore.setProfile(data);
 }
 
 /**
@@ -374,7 +372,7 @@ export function gotoLogin(returnUrl = '') {
 			content: '您当前未登录',
 			cancelText: '返回',
 			confirmText: '登录',
-			success: function({ confirm }) {
+			success: function ({ confirm }) {
 				if (confirm) {
 					if (returnUrl) {
 						navigationStore.setReturnUrl(returnUrl);
@@ -408,7 +406,7 @@ export function getCurrentUserById(uid) {
 				const profile = buildProfile(data.data[0]);
 				resolve(profile);
 			})
-			.catch(error => {
+			.catch((error) => {
 				reject(error);
 			});
 	});
@@ -419,7 +417,7 @@ export function getCurrentUserById(uid) {
  * @param {*} user
  * @returns profile
  */
-const buildProfile = user => {
+const buildProfile = (user) => {
 	const coreConfig = userStore.coreConfig;
 	let userPicture = '';
 	if (user.user_picture.uri && user.user_picture.uri.url) {
@@ -436,10 +434,10 @@ const buildProfile = user => {
 	};
 };
 
-const getRoles = roles => {
+const getRoles = (roles) => {
 	let rolesObj = {};
 	if (isArray(roles)) {
-		roles.map(item => {
+		roles.map((item) => {
 			rolesObj[item.drupal_internal__id] = item.label;
 		});
 	}
