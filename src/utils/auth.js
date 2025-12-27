@@ -12,14 +12,14 @@ var QQMapWX = require('@utils/qqmap-wx-jssdk.min.js');
  * * 获取用户地理位置
  * @returns location:(gcj02坐标) { longitude, latitude }
  */
-export function getUserLocation() {
+export function getUserLocation(save) {
 	const userStore = useUserStore();
+	const currentAddress = computed(() => userStore.address);
 	return new Promise(async (resolve, reject) => {
 		showLoading();
 
-		const {
-			'scope.userLocation': userLocation = false,
-		} = await getAppSettings();
+		const { 'scope.userLocation': userLocation = false } =
+			await getAppSettings();
 
 		if (userLocation) {
 			getLocation({
@@ -28,9 +28,11 @@ export function getUserLocation() {
 				.then(({ latitude, longitude }) => {
 					hideLoading();
 					resolve({ latitude, longitude });
-					userStore.setUserLocation({ latitude, longitude });
+					if (!currentAddress.value || save) {
+						userStore.setUserLocation({ latitude, longitude });
+					}
 				})
-				.catch(err => {
+				.catch((err) => {
 					hideLoading();
 					reject(err);
 					console.log(err);
@@ -45,9 +47,11 @@ export function getUserLocation() {
 						.then(({ latitude, longitude }) => {
 							hideLoading();
 							resolve({ latitude, longitude });
-							userStore.setUserLocation({ latitude, longitude });
+							if (save) {
+								userStore.setUserLocation({ latitude, longitude });
+							}
 						})
-						.catch(err => {
+						.catch((err) => {
 							hideLoading();
 							reject(err);
 							console.log(err);
@@ -56,7 +60,6 @@ export function getUserLocation() {
 				fail(err) {
 					reject(err);
 					hideLoading();
-					console.log(err);
 				},
 			});
 		}
@@ -78,7 +81,7 @@ export function getUserAddress({ key, latitude, longitude }) {
 			success: ({ result }) => {
 				resolve(result);
 			},
-			fail: error => {
+			fail: (error) => {
 				console.log(error);
 				reject(error);
 			},
