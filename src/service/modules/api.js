@@ -61,9 +61,9 @@ export function commentList({ uuid }) {
 	return GET(`/api/v3/comment/comment/${uuid}?noCache=1`, { cache: true });
 }
 
-export function uploadFile(filePath) {
+export function uploadFile(filePath, api) {
 	const imageData = wx.getFileSystemManager().readFileSync(filePath);
-	return POST(`/api/v1/media/image/field_media_image`, {
+	return POST(api || '/api/v1/media/image/field_media_image', {
 		header: {
 			Accept: 'application/vnd.api+json',
 			'Content-Type': 'application/octet-stream',

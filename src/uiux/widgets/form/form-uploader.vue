@@ -1,6 +1,6 @@
 <template>
-  <nut-uploader :multiple="getOptionValue('multiple') || false" :maximum="getOptionValue('max') || 5" ref="uploadRef"
-    @change="onChange" @delete="onDelete" :auto-upload="false"></nut-uploader>
+  <nut-uploader :maximum="getOptionValue('max') || 1" ref="uploadRef" @change="onChange" @delete="onDelete"
+    :auto-upload="false"></nut-uploader>
 </template>
 <script>
 import { ref, reactive, toRefs } from 'vue';
@@ -22,7 +22,7 @@ export default {
   components: {
   },
   emits: ['uploadChange'],
-  setup(props, { emit }) {
+  setup({ data }, { emit }) {
     const uploadRef = ref(null);
     const filesState = reactive({
       fids: [],
@@ -33,7 +33,7 @@ export default {
     };
 
     const uploadOneByOne = (fileList, successUp, failUp, i, length) => {
-      uploadFile(fileList[i].path)
+      uploadFile(fileList[i].path, data.api)
         .then(file => {
           successUp = successUp + 1;
           fileList[i].message = '上传成功';
@@ -48,7 +48,7 @@ export default {
             console.log(`总共：${successUp} 张成功，${failUp} 张失败！`);
             emit('uploadChange', {
               fids: filesState.fids,
-              key: props.data.key,
+              key: data.key,
             });
           } else {
             uploadOneByOne(fileList, successUp, failUp, i, length);
@@ -58,14 +58,14 @@ export default {
 
     const onDelete = files => {
       filesState.fids.splice(files.index, 1);
-      emit('uploadChange', { fids: filesState.fids, key: props.data.key });
+      emit('uploadChange', { fids: filesState.fids, key: data.key });
     };
 
     function getOptionValue(key) {
-      if (props.data.options) {
-        return props.data.options[key];
+      if (data.options) {
+        return data.options[key];
       } else {
-        return null;
+        return false;
       }
     }
 
