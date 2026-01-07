@@ -26,6 +26,7 @@ export default {
     const uploadRef = ref(null);
     const filesState = reactive({
       fids: [],
+      uuids: []
     });
 
     const onChange = ({ fileList }) => {
@@ -38,6 +39,7 @@ export default {
           successUp = successUp + 1;
           fileList[i].message = '上传成功';
           filesState.fids.push(file.data.data.attributes.drupal_internal__fid);
+          filesState.uuids.push(file.data.data.id)
         })
         .catch(() => {
           failUp = failUp + 1;
@@ -49,6 +51,7 @@ export default {
             emit('uploadChange', {
               fids: filesState.fids,
               key: data.key,
+              uuids: filesState.uuids
             });
           } else {
             uploadOneByOne(fileList, successUp, failUp, i, length);
@@ -58,7 +61,8 @@ export default {
 
     const onDelete = files => {
       filesState.fids.splice(files.index, 1);
-      emit('uploadChange', { fids: filesState.fids, key: data.key });
+      filesState.uuids.splice(files.index, 1);
+      emit('uploadChange', { fids: filesState.fids, key: data.key, uuids: filesState.uuids });
     };
 
     function getOptionValue(key) {
